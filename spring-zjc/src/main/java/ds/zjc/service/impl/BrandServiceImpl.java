@@ -16,8 +16,8 @@ public class BrandServiceImpl implements BrandService {
 	@Override
 	public Brand findOne() {
 		Brand brand = new Brand();
-//		brand.setBrandName("吉利汽车");
-//		brand.setBrandCode("jl-car");
+		brand.setBrandName("吉利汽车");
+		brand.setBrandCode("jl-car");
 		return brand;
 	}
 }
