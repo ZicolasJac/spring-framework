@@ -596,26 +596,26 @@ public abstract class AbstractApplicationContext extends DefaultResourceLoader
 		synchronized (this.startupShutdownMonitor) {
 			StartupStep contextRefresh = this.applicationStartup.start("spring.context.refresh");
 
-			// Prepare this context for refreshing.
+			// 设置启动时间,切换容器状态
 			prepareRefresh();
 
-			// 加载bean定义
+			// 获取bean工厂
 			ConfigurableListableBeanFactory beanFactory = obtainFreshBeanFactory();
 
-			// Prepare the bean factory for use in this context.
+			// 配置bean工厂:设置类加载器, 设置bean的后置处理器
 			prepareBeanFactory(beanFactory);
 
 			try {
-				// Allows post-processing of the bean factory in context subclasses.
+				// 允许子类对bean工厂进行差异化后置处理
 				postProcessBeanFactory(beanFactory);
 
-				StartupStep beanPostProcess = this.applicationStartup.start("spring.context.beans.post-process");
-				// Invoke factory processors registered as beans in the context.
+//				StartupStep beanPostProcess = this.applicationStartup.start("spring.context.beans.post-process");
+				// 调用工厂后置处理器:收集bean
 				invokeBeanFactoryPostProcessors(beanFactory);
 
 				// Register bean processors that intercept bean creation.
 				registerBeanPostProcessors(beanFactory);
-				beanPostProcess.end();
+//				beanPostProcess.end();
 
 				// Initialize message source for this context.
 				initMessageSource();
@@ -725,9 +725,9 @@ public abstract class AbstractApplicationContext extends DefaultResourceLoader
 	 * @param beanFactory the BeanFactory to configure
 	 */
 	protected void prepareBeanFactory(ConfigurableListableBeanFactory beanFactory) {
-		// Tell the internal bean factory to use the context's class loader etc.
+		// 设置类加载器
 		beanFactory.setBeanClassLoader(getClassLoader());
-		if (!shouldIgnoreSpel) {
+		if (!shouldIgnoreSpel) {// 默认不忽略
 			beanFactory.setBeanExpressionResolver(new StandardBeanExpressionResolver(beanFactory.getBeanClassLoader()));
 		}
 		beanFactory.addPropertyEditorRegistrar(new ResourceEditorRegistrar(this, getEnvironment()));

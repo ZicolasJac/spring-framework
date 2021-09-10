@@ -4,6 +4,9 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;
 
+import java.util.Collections;
+import java.util.List;
+
 @RunWith(JUnit4.class)
 public class LeetCodeTest {
 
@@ -60,5 +63,13 @@ public class LeetCodeTest {
 		}
 
 		System.out.println(result);
+	}
+
+	@Test
+	public void test() {
+		List<String> aa = Collections.emptyList();
+		for (String a : aa) {
+			System.out.println(a);
+		}
 	}
 }
