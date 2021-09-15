@@ -1,0 +1,5 @@
+spring:
+  application:
+    name: 张金闯学习Spring的项目
+  profiles:
+    active: dev

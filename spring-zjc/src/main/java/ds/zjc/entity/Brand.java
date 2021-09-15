@@ -9,6 +9,7 @@ import java.util.Date;
  */
 @Data
 public class Brand {
+
 	/**
 	 * 主键
 	 */

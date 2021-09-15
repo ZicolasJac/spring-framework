@@ -579,14 +579,11 @@ public abstract class AbstractApplicationContext extends DefaultResourceLoader
 				// 允许子类对bean工厂进行差异化后置处理
 				postProcessBeanFactory(beanFactory);
 
-//				StartupStep beanPostProcess = this.applicationStartup.start("spring.context.beans.post-process");
 				// 调用工厂后置处理器:收集bean
 				invokeBeanFactoryPostProcessors(beanFactory);
 
-				// Register bean processors that intercept bean creation.
 				// 注册bean的后置处理器
 				registerBeanPostProcessors(beanFactory);
-//				beanPostProcess.end();
 
 				// Initialize message source for this context.
 				initMessageSource();
@@ -600,18 +597,12 @@ public abstract class AbstractApplicationContext extends DefaultResourceLoader
 				// Check for listener beans and register them.
 				registerListeners();
 
-				// Instantiate all remaining (non-lazy-init) singletons.
-				// 实例化所有剩余的（非延迟初始化）单例。
+				// 实例化所有剩余的（非延迟初始化）单例
 				finishBeanFactoryInitialization(beanFactory);
 
 				// Last step: publish corresponding event.
 				finishRefresh();
 			} catch (BeansException ex) {
-				if (logger.isWarnEnabled()) {
-					logger.warn("Exception encountered during context initialization - " +
-							"cancelling refresh attempt: " + ex);
-				}
-
 				// Destroy already created singletons to avoid dangling resources.
 				destroyBeans();
 
@@ -672,7 +663,7 @@ public abstract class AbstractApplicationContext extends DefaultResourceLoader
 	 * <p>Replace any stub property sources with actual instances.
 	 *
 	 * @see org.springframework.core.env.PropertySource.StubPropertySource
-	 * @see org.springframework.web.context.support.WebApplicationContextUtils#initServletPropertySources
+	 * @see org.springframework.web.context.support
 	 */
 	protected void initPropertySources() {
 		// For subclasses: do nothing by default.

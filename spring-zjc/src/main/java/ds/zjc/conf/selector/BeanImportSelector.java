@@ -1,4 +1,4 @@
-package ds.zjc.conf.select;
+package ds.zjc.conf.selector;
 
 import org.springframework.context.annotation.ImportSelector;
 import org.springframework.core.type.AnnotationMetadata;
