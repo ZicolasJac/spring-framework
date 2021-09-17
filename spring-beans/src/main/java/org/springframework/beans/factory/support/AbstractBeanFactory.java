@@ -291,19 +291,23 @@ public abstract class AbstractBeanFactory extends FactoryBeanRegistrySupport imp
 				if (requiredType != null) {
 					beanCreation.tag("beanType", requiredType::toString);
 				}
+				// 获取bean定义
 				RootBeanDefinition mbd = getMergedLocalBeanDefinition(beanName);
+				// 检查bean定义
 				checkMergedBeanDefinition(mbd, beanName, args);
-
-				// Guarantee initialization of beans that the current bean depends on.
+				// 获取依赖的bean名称
 				String[] dependsOn = mbd.getDependsOn();
 				if (dependsOn != null) {
+					// 遍历创建所有依赖bean
 					for (String dep : dependsOn) {
 						if (isDependent(beanName, dep)) {
 							throw new BeanCreationException(mbd.getResourceDescription(), beanName,
 									"Circular depends-on relationship between '" + beanName + "' and '" + dep + "'");
 						}
+						// 注册依赖bean
 						registerDependentBean(dep, beanName);
 						try {
+							// 获取依赖的bean
 							getBean(dep);
 						} catch (NoSuchBeanDefinitionException ex) {
 							throw new BeanCreationException(mbd.getResourceDescription(), beanName,

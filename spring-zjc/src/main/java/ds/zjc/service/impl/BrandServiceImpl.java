@@ -21,10 +21,10 @@ import org.springframework.stereotype.Service;
 @Service
 public class BrandServiceImpl implements BrandService, ApplicationContextAware {
 
-	@Value("${brand.service.operator:system}")
+	@Value("${brand.service.operator:default}")
 	private String operator;
 
-	@Value("${brand.service.sign:}")
+	@Value("${brand.service.sign:default}")
 	private String sign;
 
 	private SiteService siteService;

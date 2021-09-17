@@ -196,7 +196,13 @@ class ConfigurationClassParser {
 		return this.configurationClasses.keySet();
 	}
 
-
+	/**
+	 * 解析配置类
+	 *
+	 * @param configClass 配置类
+	 * @param filter
+	 * @throws IOException
+	 */
 	protected void processConfigurationClass(ConfigurationClass configClass, Predicate<String> filter) throws IOException {
 		if (this.conditionEvaluator.shouldSkip(configClass.getMetadata(), ConfigurationPhase.PARSE_CONFIGURATION)) {
 			return;
@@ -219,6 +225,7 @@ class ConfigurationClassParser {
 		}
 
 		// Recursively process the configuration class and its superclass hierarchy.
+		// 递归处理配置类和它的父类
 		SourceClass sourceClass = asSourceClass(configClass, filter);
 		do {
 			sourceClass = doProcessConfigurationClass(configClass, sourceClass, filter);
@@ -243,7 +250,7 @@ class ConfigurationClassParser {
 		// 判断是否被@Component注解标注
 		if (configClass.getMetadata().isAnnotated(Component.class.getName())) {
 			// Recursively process any member (nested) classes first
-			// 递归处理所有
+			// 递归处理所有成员类
 			processMemberClasses(configClass, sourceClass, filter);
 		}
 

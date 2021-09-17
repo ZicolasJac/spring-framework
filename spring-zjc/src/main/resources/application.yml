@@ -3,3 +3,7 @@ spring:
     name: 张金闯学习Spring的项目
   profiles:
     active: dev
+
+hongQi:
+  name: 红旗
+  code: red-banner

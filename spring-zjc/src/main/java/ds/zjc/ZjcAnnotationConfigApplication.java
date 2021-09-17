@@ -15,25 +15,30 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
 public class ZjcAnnotationConfigApplication {
 
 	public static void main(String[] args) {
+		System.out.println("根路径:" + ZjcAnnotationConfigApplication.class.getClassLoader().getResource("").getPath());
 		ApplicationContext context = new AnnotationConfigApplicationContext(BeanConfig.class);
 		System.out.println("bean数量:" + context.getBeanDefinitionCount());
 		for (String beanName : context.getBeanDefinitionNames()) {
 			System.out.println("bean名称:" + beanName);
 		}
 
-		Brand brand = (Brand) context.getBean("zjc-brand");
-		if (brand != null) {
-			System.out.println(brand.getBrandName());
-			BrandService brandService = context.getBean(BrandService.class);
-			// 第一步
-			Brand one = brandService.findOne();
-			System.out.println(one.toString());
-			brandService.printProcess();
+		// 第一步
+		Brand brand1 = (Brand) context.getBean("brand-hongQi");
+		System.out.println(brand1.toString());
 
-			// 第二步
-			brandService.addSomeSite();
-			int siteNum = brandService.getSiteNum();
-			System.out.println("站点数量:" + siteNum);
-		}
+		// 第二步
+		BrandService brandService = context.getBean(BrandService.class);
+		Brand brand2 = brandService.findOne();
+		System.out.println(brand2.toString());
+
+		// 第三步
+		brandService.printProcess();
+
+		// 第四步
+		brandService.addSomeSite();
+
+		// 第五步
+		int siteNum = brandService.getSiteNum();
+		System.out.println("站点数量:" + siteNum);
 	}
 }
